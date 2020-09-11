@@ -1,0 +1,113 @@
+'ProgramMode:RUN
+0->A
+Theta<>pifrac45=>pifrac49->A
+0->Theta
+A=pifrac49=>Prog "MATH2000"
+<r>->Z
+<r>=72=>Goto 1
+<r>=62=>Goto 2
+Lbl 1
+pifrac69->X
+" "
+" "
+" "
+" "
+Locate 6,1,"LOGARITHMUS"
+Locate 8,3,"_log _A=B"
+Locate 11,4,"_<r>_"
+Locate 1,2,"X FUER GESUCHT TIPPEN"
+"_<r>_="?->A
+"A="?->B
+"B="?->C
+A=X=>Goto A
+B=X=>Goto B
+C=X=>Goto C
+Goto 1
+Lbl A
+CXrtB->A
+Goto D
+Lbl B
+A^C->B
+Goto D
+Lbl C
+(log B)frac(log A)->C
+Lbl D
+ClrText
+" "
+" "
+Locate 8,1,"_log _A=B"
+Locate 11,2,"_<r>_"
+Locate 1,4,"_<r>_="
+Locate 1,5,"A="
+Locate 1,6,"B="
+Locate 3,4,A
+Locate 3,5,B
+Locate 3,6,CDispsGoto 0
+Lbl 2
+"HOECHST.EXPONENT IM  ZAEHLER"?->A
+Int (A+1)->A
+Seq(0,B,1,A,1)->List 1
+List->Mat(List 1)->Mat A
+For 1->C To A
+ClrText
+"_<r>_*X^"
+Locate 5,1,A-C
+"_<r>_="
+?->Mat A[C,1]
+Next
+ClrText
+"HOECHST.EXPONENT IM  NENNER"
+?->A
+Int (A+1)->A
+Seq(0,B,1,A,1)->List 1
+List->Mat(List 1)->Mat B
+For 1->C To A
+ClrText
+"_<r>_*X^"
+Locate 5,1,A-C
+"_<r>_="
+?->Mat B[C,1]
+Next
+ClrText
+Dim Mat A->List 1
+List 1[1]->S
+Dim Mat B->List 1
+List 1[1]->T
+Seq(0,B,1,S-T+1,1)->List 1
+List->Mat(List 1)->Mat D
+Mat A->Mat C
+For 1->I To S-T+1
+Mat C[I,1]fracMat B[1,1]->B
+B->Mat D[I,1]
+For I->J To (I+T-1)
+Mat C[J,1]-BMat B[J-I+1,1]->Mat C[J,1]
+Next
+Next
+"ERGEBNIS:"DispsDim Mat D->List 1
+List 1[1]->A
+Dim Mat C->List 1
+List 1[1]->B
+For 1->C To A
+If Mat D[C,1]<>0
+Then ClrText
+"_<r>_*X^"
+Locate 5,1,A-C
+"_<r>_="
+Mat D[C,1]DispsIfEnd
+Next
+ClrText
+"REST:"Disps1->F
+For 1->C To B
+If Mat C[C,1]<>0
+Then 0->F
+ClrText
+"_<r>_*X^"
+Locate 5,1,B-C
+"_<r>_="
+Mat C[C,1]DispsIfEnd
+Next
+If F=1
+Then "KEINER"DispsIfEnd
+Goto 0
+Lbl 0
+45->W

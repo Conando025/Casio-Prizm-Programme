@@ -1,0 +1,144 @@
+'ProgramMode:RUN
+A=pifrac49=>Goto 2
+Ran#*9+0.1-><r>
+000000/(<r>pi)->A
+AxesOff
+GridOff
+ViewWindow 1,127,1,1,63,1
+Norm 
+A<>0=>Goto 3
+Lbl 1
+0->Theta
+Do
+ClrText
+ClrGraph
+Green Text (1)*3,(43)*3,"MATHE 2000"
+Red Text (8)*3,(41)*3,"HAUPTMENUE"
+Text (19)*3,(10)*3,"1. ALLGEMEINES"
+Text (25)*3,(10)*3,"2. ANALYSIS"
+Text (31)*3,(10)*3,"3. ALGEBRA"
+Text (37)*3,(10)*3,"4. STOCHASTIK"
+Text (49)*3,(10)*3,"5. CREDITS"
+Text (1)*3,(1)*3,""
+0-><r>
+Do:Getkey-><r>:LpWhile <r><>47 And <r><>72 And <r><>62 And <r><>52 And <r><>73 And <r><>63 And <r><>31
+ClrGraph
+Red Text (1)*3,(43)*3,"MATHE 2000"
+If <r>=47
+Then Goto 0
+IfEnd
+If <r>=31
+Then Z-><r>
+W<>0=>pifracW->Theta
+W=45=>Prog "M-DATEI1"
+W=46=>Prog "M-DATEI2"
+W=47=>Prog "M-DATEI3"
+W=48=>Prog "M-DATEI4"
+Goto 1
+IfEnd
+If <r>=72
+Then Green Text (8)*3,(40)*3,"ALLGEMEINES"
+Text (25)*3,(10)*3,"1. LOGARITHMUS"
+Text (31)*3,(10)*3,"2. POLYNOMDIVISION"
+Text (1)*3,(1)*3,""
+0-><r>
+Do:Getkey-><r>:LpWhile <r><>47 And <r><>72 And <r><>62
+pifrac45->Theta
+<r><>47=>Prog "M-DATEI1"
+0-><r>
+IfEnd
+If <r>=62
+Then Green Text (8)*3,(48)*3,"ANALYSIS"
+Text (49)*3,(9)*3,"FUNKTION//_(-)_EN IM GRAPHMENU"
+Text (55)*3,(45)*3,"EINGEBEN!"
+Text (25)*3,(10)*3,"1. CHECK IT"
+Text (31)*3,(10)*3,"2. TANGENTE+NORMALE AN Y1"
+Text (37)*3,(10)*3,"3. SYMMETRIE VON Y1"
+Text (1)*3,(1)*3,""
+0-><r>
+Do:Getkey-><r>:LpWhile <r><>72 And <r><>62 And <r><>52 And <r><>47
+pifrac46->Theta
+<r><>47=>Prog "M-DATEI2"
+0-><r>
+IfEnd
+If <r>=52
+Then Green Text (8)*3,(50)*3,"ALGEBRA"
+Text (19)*3,(10)*3,"1. ALLG. LAGEBEZIEHUNGEN"
+Text (25)*3,(10)*3,"2. ABSTANDSBERECHNUNG"
+Text (31)*3,(10)*3,"3. EBENENGL._(-)_UMFORMUNG"
+Text (37)*3,(10)*3,"4. SKALARPRODUKT UND MEHR"
+Text (43)*3,(10)*3,"5. TEILPUNKT U. MITTELPUNKT"
+Text (49)*3,(10)*3,"6. DREIECKSBERECHNUNGEN"
+Text (1)*3,(1)*3,""
+0-><r>
+Do:Getkey-><r>:LpWhile <r><>72 And <r><>62 And <r><>52 And <r><>73 And <r><>63 And <r><>53 And <r><>47
+pifrac47->Theta
+<r><>47=>Prog "M-DATEI3"
+0-><r>
+IfEnd
+If <r>=73
+Then Green Text (8)*3,(43)*3,"STOCHASTIK"
+Text (25)*3,(10)*3,"1. BINOMIALVERTEILUNG"
+Text (31)*3,(10)*3,"2. WAHRSCHEINL.-VERTEILUNG"
+Text (1)*3,(1)*3,""
+0-><r>
+Do:Getkey-><r>:LpWhile <r><>72 And <r><>62 And <r><>47
+pifrac48->Theta
+<r><>47=>Prog "M-DATEI4"
+IfEnd
+If <r>=63
+Then 0->W
+Red "*DAS PROGARAMM WURDE***PROGRAMMIERT VON*******LARS SCHOMANN***"
+Green " "
+Locate 5,6,"COPYRIGHTS BY"
+Locate 1,7,"THOMAS GEHRT 24.09.99"
+Integral(X^1frac4fracX,1,2->C
+Locate 6,4,"VERSION 2.8"
+For 1->B To 4
+For 1->A To 21
+B<>4=>Locate A,B," "
+B=4=>Locate A,B+1,"*"
+Next
+Next
+IfEnd
+Goto 1
+Lbl 3
+ClrText
+"BITTE CODEZAHL EIN-  GEBEN:"?->C
+Cfrac(pi<r>)-><r>
+0->C
+<r>=A=>Goto 1
+" EINGABE FEHLERHAFT!"
+For 1->Q To 21
+Locate Q,5,"*"
+Next
+Goto 0
+Lbl 2
+0->A
+"START DES PROGRAMMS  NUR UEBER HAUPTMENUE MOEGLICH!"
+For 1->Q To 21
+Locate Q,5,"*"
+Next
+Lbl 0
+0->Theta
+0-><r>
+ViewWindow (-)6.1,6.1,1,(-)3.1,3.1,1
+CoordOn
+GridOff
+AxesOn
+LabelOff
+Norm 
+S-L-Normal
+G-Connect
+DerivOff
+BG-None
+VarRange
+SigmadispOn
+FuncOn
+SimulOff
+LocusOff
+S-WindAuto
+ClrGraph
+ClrText
+Locate 4,4,"AUF WIEDERSEHEN"
+Stop

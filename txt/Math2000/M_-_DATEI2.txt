@@ -1,0 +1,151 @@
+'ProgramMode:RUN
+0->A
+Theta<>pifrac46=>pifrac49->A
+0->Theta
+A=pifrac49=>Prog "MATH2000"
+<r>->Z
+<r>=72=>Goto 1
+<r>=62=>Goto 2
+<r>=52=>Goto 3
+Lbl 1
+0.05->G
+Locate 7,1,"CHECK IT!"
+Locate 1,2,"EINGABE IM GRAPHMENU:"
+Locate 1,3,"Y1=_femto_(X) FUNKTION"
+Locate 1,4,"Y2=_femto_'(X)"
+Locate 1,5,"Y3=_femto_''(X)"
+Locate 1,6,"Y4=_femto_'''(X)"
+Locate 1,7,"Y5=F(X)"DispsClrText
+Locate 6,1,"CHECK VON:"
+Locate 2,3,"1. _femto_'(X)"
+Locate 2,4,"2. _femto_'(X) UND _femto_''(X)"
+Locate 2,5,"3. _femto_'(X) BIS _femto_'''(X)"
+Locate 2,6,"4. F(X)"
+Locate 2,7,"5. ALLE"
+Do:Getkey->Theta:LpWhile Theta<>72 And Theta<>62 And Theta<>52 And Theta<>73 And Theta<>63 And Theta<>47
+Theta=47=>Goto 0
+ClrText
+" "
+" "
+" "
+" "
+Locate 1,1,"INTERVALL EINGEBEN,IN"
+Locate 1,2,"DEM FKT.OHNE VORZEICH"
+Locate 1,3,"ENWECHSEL+STETIG IST"
+Locate 8,4,"A_<=_X_<=_B"
+"A="?->A
+"B="?->B
+ClrText
+Locate 1,1,"BESITZT DIE FKT.EINEN"
+Locate 1,2,"PARAMETER (U)?"
+Locate 1,4,"1. NEIN"
+Locate 1,5,"2. JA"
+Do:Getkey->U:LpWhile U<>72 And U<>62 And U<>47
+If U=62
+Then ClrText
+" "
+" "
+" "
+Locate 1,1,"BITTE EINEN WERT EIN-"
+Locate 1,2,"GEBEN, DEN DER PARA-"
+Locate 1,3,"METER U ANNEHMEN KANN"
+"U="?->U
+IfEnd
+ClrText
+" "
+Locate 1,1,"ERGEBNISSE:"
+Theta=73=>Goto A
+A->X
+GraphY1->C
+B->X
+GraphY1->D
+Integral(GraphY2,A,B->E
+D-C-E->F
+Locate 1,3,"_femto_'(X)-_femto_(X)   =FALSCH"
+Abs F<=G=>Locate 15,3,"RICHTIG"
+Theta=72=>Goto B
+A->X
+GraphY2->C
+B->X
+GraphY2->D
+Integral(GraphY3,A,B->E
+D-C-E->F
+Locate 1,4,"_femto_''(X)-_femto_'(X) =FALSCH"
+Abs F<=G=>Locate 15,4,"RICHTIG"
+Theta=62=>Goto B
+A->X
+GraphY3->C
+B->X
+GraphY3->D
+Integral(GraphY4,A,B->E
+D-C-E->F
+Locate 1,5,"_femto_'''(X)-_femto_''(X=FALSCH"
+Abs F<=G=>Locate 15,5,"RICHTIG"
+Theta=52=>Goto B
+Lbl A
+A->X
+GraphY5->C
+B->X
+GraphY5->D
+Integral(GraphY1,A,B->E
+D-C-E->F
+Locate 1,7,"F(X) - _femto_(X)  =FALSCH"
+Abs F<=G=>Locate 15,7,"RICHTIG"
+Lbl B
+Locate 1,2," "DispsGoto 0
+Lbl 2
+"TANGENTE UND NORMALE AN Y1 AN DER STELLE X"
+"X="?->X
+GraphY1-X*d/dx(GraphY1,X)->A
+GraphY1+Xfracd/dx(GraphY1,X)->B
+ClrText
+"TANGENTE Y=MX+N AN Y1IM PUNKT _ProbP(_X,Y):"
+"PX="
+"PY="
+"M="
+"N="
+Locate 4,3,X
+Locate 4,4,GraphY1
+Locate 3,5,d/dx(GraphY1,X)
+Locate 3,6,ADispsClrText
+"NORMALE Y=MX+N:"
+"M="
+"N="
+Locate 3,2,(-)1fracd/dx(GraphY1,X)
+Locate 3,3,BDispsGoto 0
+Lbl 3
+" "
+" "
+" "
+" "
+" "
+Locate 1,1,"SYMETRIE VOM GRAPH Y1"
+Locate 1,3,"INTERVALL EINGEBEN,IN"
+Locate 1,4,"DEM FKT. STETIG IST"
+Locate 9,5,"A_<=_X_<=_B"
+"A="?->A
+"B="?->B
+A->X
+GraphY1->B
+(-)X->X
+GraphY1->C
+B->X
+GraphY1->D
+(-)X->X
+GraphY1->E
+ClrText
+" "
+Locate 1,1,"SYMETRIE VOM GRAPH Y1"
+If B=C And D=E
+Then Locate 5,4,"_femto_(X)=_femto_(_(-)_X) _=>_"
+Locate 1,5,"AXIALSYM.ZUR Y-ACHSE"
+Else If (-)B=C And (-)D=E
+Then Locate 5,4,"_femto_(_(-)_X)=_(-)__femto_(X) _=>_"
+Locate 1,5,"PUNKTSYM.ZUM URSPRUNG"
+Else Locate 1,4,"KEINE SYMMETRIE AN"
+Locate 1,5,"Y-ACHSE BZW. URSPRUNG"
+IfEnd
+IfEnd
+Locate 1,2," "DispsGoto 0
+Lbl 0
+46->W

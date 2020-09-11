@@ -1,0 +1,68 @@
+'ProgramMode:RUN
+Z<>1=>Goto 6
+ClrText
+NP->E
+Sqrt(NP(1-P))->S
+"ERW.WERT"
+"STD.ABW."
+Locate 10,1,E
+Locate 10,2,SDisps1frac2->Z
+Goto 9
+Lbl 6
+"ERW.WERT":?->E
+"STD.ABW.":?->S
+0->Z
+Lbl 9
+ClrText
+"1 P(X_<=_A)=_pico_       _->__pico_"
+"2 P(A_<=_X_<=_B)=_pico_     _->__pico_"
+"3 P(IX-_micro_I_<=_A)=_pico_   _->__pico_"
+"4 P(X_<=_C)=A       _->_C"
+"5 P((IX-_micro_I)_<=_C)=A _->_C"
+?->Y
+If Y<>6
+Then ClrText
+Y=1=>Goto 1
+Y=2=>Goto 2
+Y=3=>Goto 3
+Y=4=>Goto 4
+Y=5=>Goto 5
+Lbl 1
+"A":?->A
+ProbP((A-E+Z)/S)->PDispsGoto 9
+Lbl 2
+"A":?->A
+"B":?->B
+ProbP((B-E+Z)/S)-ProbP((A-E-Z)/S)->PDispsGoto 9
+Lbl 3
+"A":?->A
+2*ProbQ((A+Z)/S)->PDispsGoto 9
+Lbl 4
+"A":?->A
+(-)5->D
+5->F
+For 1->B To 25
+(D+F)/2->C
+ProbP(C)<A=>C->D
+ProbP(C)>A=>C->F
+ProbP(C)=A=>Goto 8
+Next
+Lbl 8
+C*S+E-Z->C
+"          C=":Locate 14,4,CDispsGoto 9
+Lbl 5
+"A":?->A
+(-)5->D
+5->F
+For 1->B To 25
+(D+F)/2->C
+ProbQ(C)<Afrac2=>C->D
+ProbQ(C)>Afrac2=>C->F
+ProbQ(C)=Afrac2=>Goto 7
+Next
+Lbl 7
+C*S-Z->C
+"          C=":Locate 14,4,CDispsGoto 9
+Else 
+ClrText
+Locate 3,3,"Ende"

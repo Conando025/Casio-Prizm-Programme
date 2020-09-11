@@ -1,0 +1,787 @@
+'ProgramMode:RUN
+0->A
+Theta<>pifrac47=>pifrac49->A
+0->Theta
+A=pifrac49=>Prog "MATH2000"
+<r>->Z
+<r>=72=>Goto 1
+<r>=62=>Goto 2
+<r>=52=>Goto 3
+<r>=73=>Goto 4
+<r>=63=>Goto 5
+<r>=53=>Goto 6
+Lbl 1
+ClrGraph
+Text (1)*3,(10)*3,"LAGEBEZIEHUNGEN ZW. P-G-E"
+Text (20)*3,(10)*3,"1. PUNKT - EBENE"
+Text (26)*3,(10)*3,"2. GERADE - EBENE"
+Text (32)*3,(10)*3,"3. EBENE  - EBENE"
+Text (38)*3,(10)*3,"4. PUNKT - GERADE"
+Text (44)*3,(10)*3,"5. GERADE - GERADE"
+Text (50)*3,(10)*3,"6. PUNKT - PUNKT"
+Text (22)*3,(103)*3,"P G E"
+Text (31)*3,(95)*3,"E 1 2 3"
+Text (40)*3,(95)*3,"G 4 5"
+Text (49)*3,(95)*3,"P 6"
+F-Line 2.4,1.3,2.4,(-)2.5
+Text (11)*3,(37)*3,"BITTE WAEHLEN:"
+Text (1)*3,(1)*3,""
+Do:Getkey->Theta:LpWhile Theta<>72 And Theta<>62 And Theta<>52 And Theta<>73 And Theta<>63 And Theta<>53 And Theta<>47
+ClrText
+If Theta=72
+Then "PUNKT - EBENE"
+"_ProbP(_X,Y,Z):"
+"PX="?->A
+"PY="?->B
+"PZ="?->C
+" "
+"EBENE:"
+"AX+BY+CZ=F"
+"A="?->D
+"B="?->E
+"C="?->F
+"F="?->G
+If D<>0
+Then 1->I
+1->J
+(G-E-F)fracD->H
+Else If E<>0
+Then 1->H
+1->J
+(G-D-F)fracE->I
+Else 1->H
+1->I
+(G-D-E)fracF->J
+IfEnd
+IfEnd
+Abs (AD-HD+BE-IE+CF-JF)->K
+D^<2>+E^<2>+F^<2>->L
+ClrText
+"D="
+Locate 3,1,K
+"  /_Sqrt_"
+Locate 5,2,L
+" "
+" ="
+Locate 3,4,K/SqrtLDispsElse If Theta=62
+Then "GERADE - EBENE"
+" "
+"GERADE: X=A+TB"
+Locate 9,2,"_->_ _->_  _->_"
+"AX="?->A
+"AY="?->B
+"AZ="?->C
+" "
+"BX="?->D
+"BY="?->E
+"BZ="?->F
+" "
+"EBENE:"
+"AX+BY+CZ=F"
+"A="?->P
+"B="?->Q
+"C="?->R
+"F="?->U
+ClrText
+If PD+QE+RF=0
+Then If PA+QB+RC=U
+Then "G _Exp_ E"DispsElse "G II E"
+If P<>0
+Then 1->H
+1->I
+(U-R-Q)fracP->G
+Else If Q<>0
+Then 1->G
+1->I
+(U-R-P)fracQ->H
+Else 1->H
+1->G
+(U-P-Q)fracR->I
+IfEnd
+IfEnd
+Abs (PA-PG+QB-QH+RC-RI)->K
+P^<2>+Q^<2>+R^<2>->L
+"D="
+Locate 3,2,K
+"  /_Sqrt_"
+Locate 5,3,L
+" "
+" ="
+Locate 3,5,K/SqrtLDispsIfEnd
+Else (U-PA-QB-RC)frac(PD+QE+RF)->T
+"SCHNITTPUNKT:"
+" "
+" "
+"S="
+" "
+Locate 4,3,A+TD
+Locate 4,4,B+TE
+Locate 4,5,C+TF
+sin^-1 Abs ((PD+QE+RF)fracSqrt((P^<2>+Q^<2>+R^<2>)(D^<2>+E^<2>+F^<2>)))->W
+sin (pifrac2)=1=>180W/pi->W
+(Int (100W))/100->W
+Locate 1,7,"WINKEL="
+Locate 9,7,W
+Locate 14,7,"_deg_"DispsIfEnd
+Else If Theta=52
+Then "EBENE - EBENE"
+"AX+BY+CZ=F"
+"EBENE 1:"
+"A="?->H
+"B="?->G
+"C="?->F
+"F="?->E
+" "
+"EBENE 2:"
+"A="?->D
+"B="?->C
+"C="?->B
+"F="?->A
+ClrText
+If CH=DG And CF=BG And BH=FD
+Then If (H<>0 And DE=HA) Or (G<>0 And EC=GA) Or (F<>0 And EB=FA)DispsThen "E1 = E2"DispsElse "E1 II E2"
+If H<>0
+Then 1->J
+1->K
+(E-F-G)fracH->I
+Else If G<>0
+Then 1->I
+1->K
+(E-F-H)fracG->J
+Else 1->I
+1->J
+(E-H-G)fracF->K
+IfEnd
+IfEnd
+If D<>0
+Then 1->M
+1->N
+(A-B-C)fracD->L
+Else If C<>0
+Then 1->N
+1->L
+(A-D-B)fracC->M
+Else 1->L
+1->M
+(A-C-D)fracB->N
+IfEnd
+IfEnd
+Abs (IH-LH+JG-MG+KF-NF)->O
+H^<2>+G^<2>+F^<2>->P
+"D="
+Locate 3,3,O
+"  /_Sqrt_"
+Locate 5,4,P
+" "
+" ="
+Locate 3,6,O/SqrtPDispsIfEnd
+Else "SCHNITTGERADE:"
+GB-FC->I
+FD-BH->J
+HC-GD->K
+If D<>0
+Then If J<>0
+Then (DE+HC-DG-HA)fracJ->T
+(A-C-BT)fracD->R
+1->S
+Else (DE+BH-DF-HA)frac(-)K->S
+(A-B-CS)fracD->R
+1->T
+IfEnd
+Else If C<>0
+Then If K<>0
+Then (CE+BG-FC-GA)fracK->R
+(A-B-DR)fracC->S
+1->T
+Else (CE+DG-HC-GA)frac(-)I->T
+(A-D-BT)fracC->S
+1->R
+IfEnd
+Else If I<>0
+Then (BE+FD-BH-FA)fracI->S
+(A-D-CS)fracB->T
+1->R
+Else (BE+FC-GB-FA)frac(-)J->R
+(A-C-DR)fracB->T
+1->S
+IfEnd
+IfEnd
+IfEnd
+Locate 1,3,"_->_"
+Locate 1,4,"X="
+Locate 4,3,R
+Locate 4,4,S
+Locate 4,5,T
+Locate 12,4,"+T"
+Locate 15,3,I
+Locate 15,4,J
+Locate 15,5,K
+Locate 1,7,"WINKEL="
+cos^-1 Abs ((HD+GC+FB)fracSqrt((H^<2>+G^<2>+F^<2>)(D^<2>+C^<2>+B^<2>)))->W
+sin (pifrac2)=1=>180W/pi->W
+(Int (100W))/100->W
+Locate 9,7,W
+Locate 14,7,"_deg_"DispsIfEnd
+Else If Theta=73
+Then "PUNKT - GERADE"
+"_ProbP(_X,Y,Z):"
+"PX="?->A
+"PY="?->B
+"PZ="?->C
+" "
+"GERADE: X=A+TB"
+Locate 9,6,"_->_ _->_  _->_"
+"AX="?->D
+"AY="?->E
+"AZ="?->F
+" "
+"BX="?->G
+"BY="?->H
+"BZ="?->I
+A-D->J
+B-E->K
+C-F->L
+KI-LH->M
+LG-JI->N
+JH-KG->O
+G^<2>+H^<2>+I^<2>->P
+M^<2>+N^<2>+O^<2>->Q
+ClrText
+"D=_Sqrt_"
+Locate 4,1,QfracP
+" ="
+Locate 3,2,SqrtQfracPDispsElse If Theta=63
+Then "GERADE - GERADE"
+" "
+"GERADE 1: X=A+TB"
+Locate 11,2,"_->_ _->_  _->_"
+"AX="?->A
+"AY="?->B
+"AZ="?->C
+" "
+"BX="?->D
+"BY="?->E
+"BZ="?->F
+" "
+"GERADE 2: X=C+TD"
+Locate 11,6,"_->_ _->_  _->_"
+"CX="?->G
+"CY="?->H
+"CZ="?->I
+" "
+"DX="?->J
+"DY="?->K
+"DZ="?->L
+ClrText
+If (DK=JE) And (DL=JF) And (EL=FK)
+Then If (AK-GK=BJ-HJ) And (BL-HL=CK-IK) And (LA-LG=JC-JI)
+Then "G1 = G2"DispsElse "G1 II G2"
+A-G->P
+B-H->Q
+C-I->R
+QL-RK->S
+RJ-PL->U
+PK-QJ->V
+S^<2>+U^<2>+V^<2>->W
+J^<2>+K^<2>+L^<2>->X
+"D=_Sqrt_"
+" "
+Locate 4,2,W
+Locate 3,3,"/_Sqrt_"
+Locate 5,3,X
+" "
+" ="
+Locate 3,5,SqrtWfracXDispsIfEnd
+Else EL-FK->M
+FJ-DL->N
+DK-EJ->O
+If MG+NH+OI=MA+NB+OC:Then If M=0
+Then If N=0
+Then (DH+AE-DB-GE)frac(LE-DK)->T
+Else (FG+CD-AF-ID)frac(LD-JF)->T:IfEnd
+Else (IE+BF-CE-HF)frac(KF-LE)->T:IfEnd
+"SCHNITTPUNKT:"
+" "
+" "
+"S="
+" "
+Locate 4,3,G+TJ
+Locate 4,4,H+TK
+Locate 4,5,I+TL
+Locate 1,7,"WINKEL="
+cos^-1 Abs ((DJ+EK+FL)fracSqrt((D^<2>+E^<2>+F^<2>)(J^<2>+K^<2>+L^<2>)))->W
+sin (pifrac2)=1=>180W/pi->W
+(Int (100W))/100->W
+Locate 9,7,W
+Locate 14,7,"_deg_"DispsElse "WINDSCHIEF"
+Abs (M(A-G)+N(B-H)+O(C-I))->W
+M^<2>+N^<2>+O^<2>->X
+"D="
+Locate 3,2,W
+"  /_Sqrt_"
+Locate 5,3,X
+" "
+" ="
+Locate 3,5,WfracSqrtXDispsIfEnd
+IfEnd
+Else If Theta=53
+Then "PUNKT - PUNKT"
+"P1(X,Y,Z):"
+"X1="?->A
+"Y1="?->B
+"Z1="?->C
+" "
+"P2(X,Y,Z):"
+"X2="?->D
+"Y2="?->E
+"Z2="?->F
+(A-D)^<2>+(B-E)^<2>+(C-F)^<2>->G
+ClrText
+"D=_Sqrt_"
+" ="
+Locate 4,1,G
+Locate 3,2,SqrtG
+Locate 1,4,"G(P1P2):"
+Locate 1,5,"_->_"
+Locate 1,6,"X="
+Locate 4,5,A
+Locate 4,6,B
+Locate 4,7,C
+Locate 8,6,"+T"
+Locate 11,5,D-A
+Locate 11,6,E-B
+Locate 11,7,F-CDispsElse " "
+IfEnd
+IfEnd
+IfEnd
+IfEnd
+IfEnd
+IfEnd
+Goto 0
+Lbl 2
+Locate 2,1,"ABSTANDSBERECHNUNG"
+Locate 1,3,"BITTE WAEHLEN:"
+Locate 1,4,"1.PUNKT - EBENE"
+Locate 1,5,"2.PUNKT - GERADE (V3)"
+Locate 1,6,"3.WINDSCHIEFE GERADEN"
+Locate 1,7,"4.PUNKT - GERADE (V2)"
+Do:Getkey->Theta:LpWhile Theta<>72 And Theta<>62 And Theta<>52 And Theta<>73 And Theta<>47
+ClrText
+Theta=47=>Goto 0
+Theta=52=>Goto A
+Theta=72=>Goto B
+Theta=62=>Goto C
+Theta=73=>Goto D
+Lbl A
+" "
+" "
+Locate 4,1,"_->_ _->_  _->_"
+Locate 16,1,"_->_ _->_  _->_"
+Locate 1,2,"G1:X=A+RB   G2:X=C+SD"
+"GERADE 1:"
+"AX="?->D
+"AY="?->E
+"AZ="?->F
+" "
+"BX="?->J
+"BY="?->K
+"BZ="?->L
+" "
+"GERADE 2:"
+"CX="?->G
+"CY="?->H
+"CZ="?->I
+" "
+"DX="?->M
+"DY="?->N
+"DZ="?->O
+KO-LN->A
+LM-JO->B
+JN-KM->C
+ClrText
+Locate 5,2,"_->_ _->_"
+Locate 12,2,"_->_ _->_"
+Locate 5,3,"N*B=0  N*D=0"
+Goto E
+Lbl B
+" "
+" "
+Locate 5,1,"E: AX+BY+CZ=F"
+Locate 5,2,"E=PUNKT VON E"
+"EBENE:"
+"A="?->A
+"B="?->B
+"C="?->C
+"F="?->D
+" "
+"PUNKT DER EBENE:"
+"EX="?->D
+"EY="?->E
+"EZ="?->F
+" "
+"PUNKT:"
+"PX="?->G
+"PY="?->H
+"PZ="?->I
+ClrText
+Lbl E
+Locate 7,6,"N="
+Locate 7,5,"_->_"
+Locate 10,5,A
+Locate 10,6,B
+Locate 10,7,CDispsAbs (A^<2>+B^<2>+C^<2>)->J
+ClrText
+Locate 2,2,"_->_"
+Locate 1,3,"{N}=_Sqrt_      ="
+Locate 6,3,J
+Locate 13,3,SqrtJ
+Locate 4,5,"_->_ _->_  -_->_  -_->_ _->_  _->_"
+Locate 1,6,"D=[P-E]*N0  N0=N_frac_{N}"DispsClrText
+" "
+" "
+" "
+" "
+(G-D)*A->M
+(H-E)*B->N
+(I-F)*C->O
+Locate 1,1,"D=1_frac__Sqrt_      *(A+B+C)"
+Locate 3,2,"A="
+Locate 3,3,"B="
+Locate 3,4,"C="
+Locate 6,1,J
+Locate 7,2,M
+Locate 7,3,N
+Locate 7,4,O
+Abs (M+N+O)->P
+Locate 1,6,"D="
+Locate 3,6,P
+Locate 9,6,"_frac__Sqrt_"
+Locate 11,6,J
+Locate 20,6,"LE"
+Locate 2,7,"="
+Locate 3,7,PfracSqrtJ
+Locate 20,7,"LE"DispsGoto 0
+Lbl C
+" "
+" "
+Locate 3,1,"_->_ _->_  _->_"
+Locate 3,2,"X=A+TB"
+Locate 12,2,"_ProbP(_X,Y,Z)"
+"GERADE:"
+"AX="?->A
+"AY="?->B
+"AZ="?->C
+" "
+"BX="?->D
+"BY="?->E
+"BZ="?->F
+" "
+"PUNKT:"
+"PX="?->G
+"PY="?->H
+"PZ="?->I
+DG+EH+FI->J
+J-(AD+BE+CF)->K
+D^<2>+E^<2>+F^<2>->L
+L=0=>"KEINE LOESUNG"
+L=0=>Stop
+KfracL->P
+A+PD->M
+B+PE->N
+C+PF->O
+ClrText
+" "
+" "
+Locate 4,1,"X+    Y+    Z="
+Locate 1,1,D
+Locate 6,1,E
+Locate 12,1,F
+Locate 18,1,J
+Locate 1,4,"XD=    +    T"
+Locate 1,5,"YD=    +    T"
+Locate 1,6,"ZD=    +    T"
+Locate 4,4,A
+Locate 4,5,B
+Locate 4,6,C
+Locate 9,4,D
+Locate 9,5,E
+Locate 9,6,FDispsClrText
+Locate 7,2,"D(X,Y,Z)"
+Locate 1,4,"X="
+Locate 3,4,M
+Locate 1,5,"Y="
+Locate 3,5,N
+Locate 1,6,"Z="
+Locate 3,6,ODispsG-M->Q
+H-N->R
+I-O->S
+Q^<2>+R^<2>+S^<2>->T
+ClrText
+" "
+" "
+" "
+" "
+" "
+Locate 5,1,"--"
+Locate 5,2,"DP=_Sqrt_(A_^<2>_+B_^<2>_+C_^<2>_)"
+Locate 1,3,"A=PX-DX="
+Locate 1,4,"B=PY-DY="
+Locate 1,5,"C=PZ-DZ="
+Locate 1,7,"DP=_Sqrt_"
+Locate 10,3,Q
+Locate 10,4,R
+Locate 10,5,S
+Locate 5,7,T
+Locate 12,7,"="
+Locate 13,7,SqrtT
+Locate 20,7,"LE"DispsGoto 0
+Lbl D
+" "
+" "
+Locate 4,1,"AX+BY=C  _ProbP(_X,Y)"
+"A="?->A
+"B="?->B
+"C="?->C
+" "
+"PX="?->D
+"PY="?->E
+A^<2>+B^<2>->F
+ClrText
+" "
+" "
+Locate 2,1,"_->_"
+Locate 1,2,"{N}=_Sqrt_"
+Locate 6,2,F
+Locate 12,2,"="
+Locate 13,2,SqrtF
+Locate 1,4,"HESESCHE NORMALENFORM"
+Locate 3,5,"(AX+BY+C)_frac__Sqrt_    =0"
+Locate 14,5,F
+Locate 1,6,"A="
+Locate 3,6,A
+Locate 11,6,"B="
+Locate 13,6,B
+Locate 1,7,"C="
+Locate 3,7,(-)CDisps" "
+Locate 1,1,"D={(A*PX+B*PY+C)_frac__Sqrt_  }"
+Locate 19,1,F
+AD+BE-C->G
+Locate 1,5,"PX=       PY=      "
+Locate 4,5,D
+Locate 14,5,E
+Locate 1,2,"D={      _frac__Sqrt_         }"
+Locate 4,2,G
+Locate 12,2,F
+Locate 1,3,"D="
+Locate 3,3,Abs (GfracSqrtF)DispsGoto 0
+Lbl 3
+" "
+" "
+" "
+" "
+Locate 2,1,"EBENENGL._(-)_UMFORMUNG"
+Locate 7,3,"_->_ _->_  _->_  _->_"
+Locate 7,4,"X=A+RB+SC"
+"AX="?->A
+"AY="?->B
+"AZ="?->C
+" "
+"BX="?->D
+"BY="?->E
+"BZ="?->F
+" "
+"CX="?->G
+"CY="?->H
+"CZ="?->I
+EI-FH->J
+FG-DI->K
+DH-EG->L
+If J=0
+Then If K=0
+Then If L=0
+Then "SPANNVEKTOREN SIND"
+"PARALLEL"DispsGoto 0
+IfEnd
+IfEnd
+IfEnd
+AJ+KB+LC->P
+ClrText
+" "
+Locate 6,1,"AX+BY+CZ=F"
+Locate 1,3,"A="
+Locate 3,3,J
+Locate 1,4,"B="
+Locate 3,4,K
+Locate 1,5,"C="
+Locate 3,5,L
+Locate 1,6,"F="
+Locate 3,6,PDispsGoto 0
+Lbl 4
+Deg
+" "
+" "
+" "
+Locate 1,1,"SKALARPRODUKT+WINKEL+"
+Locate 1,2,"BETRAEGE+NORMALENVEK."
+"VEKTOR A:"
+"AX="?->A
+"AY="?->B
+"AZ="?->C
+" "
+"VEKTOR B:"
+"BX="?->D
+"BY="?->E
+"BZ="?->F
+ClrText
+A^<2>+B^<2>+C^<2>->G
+D^<2>+E^<2>+F^<2>->H
+AD+BE+CF->I
+BF-CE->M
+CD-AF->N
+AE-BD->O
+Locate 1,2,"BETRAG VEKTOR A:"
+Locate 1,4,"BETRAG VEKTOR B:"
+Locate 1,6,"SKALARPRODUKT:"
+Locate 1,3,"_Sqrt_"
+Locate 1,5,"_Sqrt_"
+Locate 10,3,"="
+Locate 10,5,"="
+Locate 2,3,G
+Locate 2,5,H
+Locate 11,3,SqrtG
+Locate 11,5,SqrtH
+Locate 1,7,IDispsClrText
+cos^-1 (I/(SqrtG*SqrtH))->J
+Locate 1,2,"WINKEL IN _deg_:"
+Locate 1,4,"NORMALENVEKTOR:"
+Locate 1,5,"NX="
+Locate 1,6,"NY="
+Locate 1,7,"NZ="
+Locate 14,2,J
+Locate 4,5,M
+Locate 4,6,N
+Locate 4,7,ODispsGoto 0
+Lbl 5
+" "
+Locate 1,1,"TEIL- UND MITTELPUNKT"
+" "
+"PUNKT A(X,Y,Z):"
+"AX="?->A
+"AY="?->B
+"AZ="?->C
+" "
+"PUNKT B(X,Y,Z):"
+"BX="?->D
+"BY="?->E
+"BZ="?->F
+" "
+"LAMBDA:"
+"L="?->G
+G*10^6->G
+Gfrac1000000->G
+(A+GD)frac(1+G)->J
+(B+GE)frac(1+G)->K
+(C+GF)frac(1+G)->L
+(A+D)frac2->M
+(B+E)frac2->N
+(C+F)frac2->O
+ClrText
+Locate 2,2,"TEILPUNKT T(X,Y,Z):"
+Locate 1,4,"TX="
+Locate 1,5,"TY="
+Locate 1,6,"TZ="
+Locate 4,4,J
+Locate 4,5,K
+Locate 4,6,LDispsClrText
+Locate 1,2,"MITTELPUNKT M(X,Y,Z):"
+Locate 1,4,"MX="
+Locate 1,5,"MY="
+Locate 1,6,"MZ="
+Locate 4,4,M
+Locate 4,5,N
+Locate 4,6,ODispsGoto 0
+Lbl 6
+" "
+Locate 1,1,"BERECHNUNGEN AM DREI-"
+"ECK ABC:"
+" "
+"AX="?->A
+"AY="?->B
+"AZ="?->C
+" "
+"BX="?->D
+"BY="?->E
+"BZ="?->F
+" "
+"CX="?->G
+"CY="?->H
+"CZ="?->I
+(A+D+G)frac3->W
+(B+E+H)frac3->X
+(C+F+I)frac3->Y
+D-A->J
+E-B->K
+F-C->L
+G-A->M
+H-B->N
+I-C->O
+G-D->P
+H-E->Q
+I-F->R
+J^<2>+K^<2>+L^<2>->D
+M^<2>+N^<2>+O^<2>->E
+P^<2>+Q^<2>+R^<2>->F
+JM+KN+LO->S
+(-)JP-KQ-LR->T
+MP+NQ+OR->U
+cos^-1 (S/(SqrtD*SqrtE))->G
+cos^-1 (T/(SqrtD*SqrtF))->H
+cos^-1 (U/(SqrtE*SqrtF))->I
+(SqrtD+SqrtE+SqrtF)frac2->S
+S*(S-SqrtD)*(S-SqrtE)*(S-SqrtF)->T
+ClrText
+Locate 1,2,"LAENGENANGABEN IN LE:"
+Locate 1,4,"SEITE AB: _Sqrt_"
+Locate 1,5,"SEITE AC: _Sqrt_"
+Locate 1,6,"SEITE BC: _Sqrt_"
+Locate 12,4,D
+Locate 12,5,E
+Locate 12,6,FDispsClrText
+Locate 2,2,"WINKELANGABEN IN _deg_"
+Locate 1,4,"WINKEL CAB:"
+Locate 1,5,"WINKEL ABC:"
+Locate 1,6,"WINKEL BCA:"
+Locate 13,4,G
+Locate 13,5,H
+Locate 13,6,IDispsClrText
+Locate 1,2,"UMFANG:"
+Locate 1,3,"FLAECHE:_Sqrt_"
+Locate 1,4,"SCHWERPUNKT S(X,Y,Z):"
+Locate 1,5,"SX="
+Locate 1,6,"SY="
+Locate 1,7,"SZ="
+Locate 10,2,2S
+Locate 10,3,T
+Locate 20,2,"LE"
+Locate 20,3,"FE"
+Locate 4,5,W
+Locate 4,6,X
+Locate 4,7,YDispsKO-LN->P
+LM-JO->Q
+JN-KM->R
+P=0 And Q=0 And R=0=>Goto 0
+AP+BQ+CR->V
+ClrText
+" "
+" "
+Locate 1,1,"DAS DREIECK ABC LIEGT"
+Locate 1,2,"IN D.EBENE AX+BY+CZ=F"
+Locate 1,4,"A="
+Locate 1,5,"B="
+Locate 1,6,"C="
+Locate 1,7,"F="
+Locate 3,4,P
+Locate 3,5,Q
+Locate 3,6,R
+Locate 3,7,VDispsLbl 0
+47->W
