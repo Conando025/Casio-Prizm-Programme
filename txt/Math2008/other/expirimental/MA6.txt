@@ -1,0 +1,384 @@
+'ProgramMode:RUN
+0->A~W
+0->Z
+Do
+ClrText
+ClrGraph
+AxesOff
+X=2=>Goto 9
+ViewWindow 1,127,0,1,63,0
+"Dreiecksberechnung"
+"=================="
+"A="?->A
+"B="?->B
+"C="?->C
+"Alpha="?->D
+"Beta="?->E
+"Gamma="?->F
+1->Z
+If A>0 And B>0 And C>0 And Y=0
+Then cos^-1 ((B^<2>+C^<2>-A^<2>)/2BC)->D
+cos^-1 ((A^<2>+C^<2>-B^<2>)/2AC)->E
+cos^-1 ((A^<2>+B^<2>-C^<2>)/2AB)->F
+1->Y
+IfEnd
+If A>0 And B>0 And D>0 And Y=0
+Then sin^-1 (Bsin D/A)->E
+180-D-E->F
+Sqrt(A^<2>+B^<2>-2ABcos F)->C
+2->Z
+1->Y
+180-E->K
+180-D-K->L
+D->J
+A->G
+B->H
+Sqrt(G^<2>+H^<2>-2GHcos L)->I
+IfEnd
+If A>0 And B>0 And E>0 And Y=0
+Then sin^-1 (Asin E/B)->D
+180-E-D->F
+Sqrt(A^<2>+B^<2>-2ABcos F)->C
+2->Z
+1->Y
+180-D->J
+180-E-J->L
+A->G
+B->H
+E->K
+Sqrt(G^<2>+H^<2>-2GHcos L)->I
+IfEnd
+If A>0 And B>0 And F>0 And Y=0
+Then Sqrt(A^<2>+B^<2>-2ABcos F)->C
+cos^-1 ((B^<2>+C^<2>-A^<2>)/(2BC))->D
+180-D-F->E
+1->Y
+IfEnd
+If A>0 And C>0 And D>0 And Y=0
+Then sin^-1 (Csin D/A)->F
+180-F-D->E
+Sqrt(A^<2>+C^<2>-2ACsin E)->B
+2-Z
+1->Y
+180-F->L
+180-D-L->K
+A->G
+C->I
+D->J
+Sqrt(G^<2>+I^<2>-2GIcos K)->H
+IfEnd
+If A>0 And C>0 And E>0 And Y=0
+Then Sqrt(A^<2>+C^<2>-2ACcos E)->B
+cos^-1 ((B^<2>+C^<2>-A^<2>)/2BC)->D
+180-D-E->F
+IfEnd
+If A>0 And C>0 And F>0 And Y=0
+Then sin^-1 (Asin F/C)->D
+180-D-E->F
+Sqrt(A^<2>+C^<2>-2ACcos E)->B
+2->Z
+1->Y
+180-D->J
+180-F-J->K
+A->G
+C->I
+F->L
+Sqrt(G^<2>+I^<2>-2GCcos K)->H
+IfEnd
+If B>0 And C>0 And D>0 And Y=0
+Then Sqrt(B^<2>+C^<2>-2BCcos D)->A
+cos^-1 ((A^<2>+C^<2>-B^<2>)/2AC)->E
+180-E-D->F
+1->Y
+IfEnd
+If B>0 And C>0 And E>0 And Y=0
+Then sin^-1 (Csin E/B)->F
+180-E-F->D
+Sqrt(B^<2>+C^<2>-2BCcos D)->A
+2->Z
+1->Y
+180-F->L
+180-E-W->J
+B->H
+C->I
+E->K
+Sqrt(H^<2>+I^<2>-2HIcos J)->G
+IfEnd
+If B>0 And C>0 And F>0 And Y=0
+Then sin^-1 (Bsin F/C)->E
+180-F-E->D
+Sqrt(B^<2>+C^<2>-2BCcos D)->A
+2->Z
+1->Y
+180-E->K
+180-F-K->J
+B->H
+C->I
+F->L
+Sqrt(H^<2>+I^<2>-2HIcos J)->G
+IfEnd
+If A>0 And D>0 And E>0 And Y=0
+Then A/sin Dsin E->B
+180-D-E->F
+Sqrt(A^<2>+B^<2>-2ABcos F)->C
+1->Y
+IfEnd
+If A>0 And D>0 And F>0 And Y=0
+Then A/sin Dsin F->C
+180-D-F->E
+Sqrt(A^<2>+C^<2>-2ACcos E)->B
+1->Y
+IfEnd
+If A>0 And E>0 And F>0 And Y=0
+Then 180-E-F->D
+A/sin Dsin E->B
+Sqrt(A^<2>+B^<2>-2ABcos F)->C
+1->Y
+IfEnd
+If B>0 And D>0 And E>0 And Y=0
+Then Bsin D/sin E->A
+180-D-E->F
+Sqrt(A^<2>+B^<2>-2ABcos F)->C
+1->Y
+IfEnd
+If B>0 And D>0 And F>0 And Y=0
+Then Bsin F/sin E->C
+180-E-F->D
+Sqrt(B^<2>+C^<2>-2BCcos D)->A
+1->Y
+IfEnd
+If C>0 And D>0 And E>0 And Y=0
+Then 180-D-E->F
+Csin D/sin F->A
+Sqrt(A^<2>+C^<2>-2ACcos E)->B
+1->Y
+IfEnd
+If C>0 And D>0 And F>0 And Y=0
+Then Csin D/sin F->A
+180-D-F->E
+Sqrt(A^<2>+C^<2>-2ACcos E)->B
+1->Y
+IfEnd
+If C>0 And E>0 And F>0 And Y=0
+Then C/sin Fsin E->B
+180-E-F->D
+Sqrt(B^<2>+C^<2>-2BCcos D)->A
+IfEnd
+[[0,0,0,0,0,0,0,0,0,0,0,0][0,0,0,0,0,0,0,0,0,0,0,0]]->Mat A
+A->Mat A[1,1]
+B->Mat A[1,2]
+C->Mat A[1,3]
+D->Mat A[1,4]
+E->Mat A[1,5]
+F->Mat A[1,6]
+G->Mat A[2,1]
+H->Mat A[2,2]
+I->Mat A[2,3]
+J->Mat A[2,4]
+K->Mat A[2,5]
+L->Mat A[2,6]
+Bsin D->Mat A[1,7]
+Mat A[1,7]*C/2->Mat A[1,8]
+Bsin F->Mat A[1,9]
+Asin F->Mat A[1,10]
+1->B
+Do
+Cls
+Text (1)*3,(1)*3,"A"
+Text (7)*3,(1)*3,"B"
+Text (13)*3,(1)*3,"C"
+Text (19)*3,(1)*3,"Alpha"
+Text (25)*3,(1)*3,"Beta"
+Text (31)*3,(1)*3,"Gamma"
+Text (37)*3,(1)*3,"Flaeche"
+Text (43)*3,(1)*3,"HA"
+Text (49)*3,(1)*3,"HB"
+Text (55)*3,(1)*3,"HC"
+For 1->I To 55 Step 6
+Text (I)*3,(38)*3,"="
+Next
+For 0->I To 9
+I*6+1->A
+B=1=>Text (A)*3,(45)*3,Mat A[1,I+1]
+B=2=>Text (A)*3,(45)*3,Mat A[2,I+1]
+Next
+Text (55)*3,(99)*3,"1//"
+B=2 And Z=2=>Text (55)*3,(99)*3,"2//"
+Text (55)*3,(108)*3,Z
+Do
+Getkey->C
+If C=27 And Z=2 And B=1
+Then Hsin J->Mat A[2,7]
+IMat A[2,7]/2->Mat A[2,8]
+Hsin L->Mat A[2,9]
+Gsin L->Mat A[2,10]
+2->B
+IfEnd
+C=38 And Z=2 And B=2=>1->B
+LpWhile C=0
+LpWhile C<>31
+[[0]]->Mat A
+Prog "Math2003"
+Lbl 9
+Text (8)*3,(40)*3,"Kreis"
+Text (14)*3,(40)*3,"====="
+Text (22)*3,(5)*3,"Lagebez. Kreis-Gerade---->1"
+Text (36)*3,(5)*3,"Tangente-------------->2"
+Text (40)*3,(5)*3," "
+AxesOn
+Do
+Getkey->T
+LpWhile T=0
+If T=72
+Then Goto A
+IfEnd
+If T=62
+Then Goto B
+Else Stop
+IfEnd
+LpWhile T<>71
+' 
+' 
+Lbl A
+Cls
+"Kreis:"
+"Mittelpunkt:"
+"XM="?->A
+"YM="?->B
+"Radius:"?->R
+ClrText
+"     Gerade"
+" parameterfrei (1)"
+"    oder in"
+" Parameterform (2)"?->Z
+Z=1=>Goto 1
+Z=2=>Goto 2
+Lbl 1
+ClrText
+"Anstieg m="?->M
+"n="?->N
+Goto 3
+Lbl 2
+ClrText
+"Koordinaten des"
+"Stuetzvektors"
+?->X
+?->Y
+ClrText
+"Richtungsvektor"
+?->C
+?->D
+If C<>0
+Then D/C->M
+Y-XD/C->N
+Goto 3
+Else ClrText
+IfEnd
+If Abs (X-A)>R
+Then ClrText
+Goto 4
+IfEnd
+If Abs (X-A)=R
+Then ClrText
+X->T
+B->Y
+Goto 5
+Else X->S
+X->U
+B-Sqrt(-X^<2>+2AX-A^<2>+R^<2>)->Y
+B+Sqrt(-X^<2>+2AX-A^<2>+R^<2>)->V
+Goto 6
+'
+Lbl 3
+ClrText
+((2MN-2A-2BM)/(M^<2>+1))->P
+((A^<2>+B^<2>+N^<2>-R^<2>-2BN)/(M^<2>+1))->Q
+((P^<2>/4)-Q)->D
+If D<0
+Then ClrText
+Lbl 4
+" "
+"Die Gerade ist eine  Passante"DispsGoto 8
+IfEnd
+If D=0
+Then -P/2->T
+MT+N->Y
+Int (1000*T)/1000->T
+Int (1000*Y)/1000->Y
+Lbl 5
+ClrText
+" "
+"Die Gerade ist eine  Tangente,            Beruehrungspunkt:"
+" S(        ;       )"
+Locate 4,5,T
+Locate 13,5,YDispsGoto 8
+Else (-P/2)-SqrtD->S
+(-P/2)+SqrtD->U
+MS+N->Y
+MU+N->V
+Int (1000*S)/1000->S
+Int (1000*Y)/1000->Y
+Int (1000*U)/1000->U
+Int (1000*V)/1000->V
+Lbl 6
+ClrText
+" "
+"Die Gerade ist eine  Sekante,             Schnittpunkte:       S1(        ;        )S2(        ;        )"
+Locate 4,5,S
+Locate 13,5,Y
+Locate 4,6,U
+Locate 13,6,VDispsIfEnd
+Goto 8
+'
+'
+Lbl B
+ClrText
+"Kreis:"
+"Mittelpunkt:"
+"XM="?->A
+"YM="?->B
+"Radius:"?->R
+ClrText
+"x-Wert Beruehr-punkt"?->X
+B^<2>+X^<2>-2AX+A^<2>-R^<2>->D
+If B^<2>-D<0
+Then ClrText
+" Punkt liegt nicht"
+" auf Kreis"DispsGoto 8
+IfEnd
+If B^<2>-D=0
+Then ClrText
+" "
+"Senkrechte Tangente:"
+"Gleichung: X="
+Locate 14,3,X
+Goto 8
+IfEnd
+ClrText
+B+Sqrt(B^<2>-D)->Y
+"Zwei Tangenten:"
+" "
+"P1 (      ;      )"
+Locate 5,3,Int (1000*X)/1000
+Locate 12,3,Int (1000*Y)/1000
+"t1: y=       x+"
+(A-X)/(Y-B)->M
+Y-MX->N
+Int (1000*M)/1000->M
+Int (1000*N)/1000->N
+Locate 7,4,M
+Locate 16,4,N
+B-Sqrt(B^<2>-D)->Y
+" "
+"P2 (      ;      )"
+Locate 5,6,Int (1000*X)/1000
+Locate 12,6,Int (1000*Y)/1000
+"t2: y=       x+"
+(A-X)/(Y-B)->M
+Y-MX->N
+Int (1000*M)/1000->M
+Int (1000*N)/1000->N
+Locate 7,7,M
+Locate 16,7,N
+Lbl 8
+" "DispsProg "MATH2008"

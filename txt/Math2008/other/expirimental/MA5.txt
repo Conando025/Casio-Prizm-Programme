@@ -1,0 +1,409 @@
+'ProgramMode:RUN
+0->A~Y
+ClrText
+<r>=62=>Goto 2
+<r>=52=>Goto 3
+<r>=73=>Goto 5
+<r>=63=>Goto 6
+<r>=53=>Goto 7
+Deg
+Norm 
+ClrText
+"Kreisberechnung aus 3Punkten"
+" "
+"Wenn einer der Punkteauf 0//0 liegt, dann  diesen als Punkt A   eingeben"
+" "
+"Punkt A"
+"x1"?->A
+"y1"?->B
+"Punkt B"
+"x2"?->C
+"y2"?->D
+"Punkt C"
+"x3"?->E
+"y3"?->F
+3->X
+((C-A)*(E-A)+(D-A)*(F-B))=0 Or ((C-A)*(C-E)+(D-B)*(D-F))=0 Or ((E-A)*(C-E)+(F-B)*(D-F)=0=>Goto A
+Solve((A^<2>+B^<2>-C^<2>-D^<2>)+((((-)A^<2>-B^<2>+E^<2>+F^<2>)-(X((-)2B+2F)))frac((-)2A+2E))*((-)2A+2C)+X((-)2B+2D),X)
+X->S
+Solve(X*((-)2A+2C)-((X*((-)2A+2E)((-)2B+2D))frac((-)2B+2F))+((((-)A^<2>-B^<2>+E^<2>+F^<2>)((-)2B+2D))frac((-)2B+2F))+(A^<2>+B^<2>-C^<2>-D^<2>),X
+X->T
+A-T-><r>
+B-S->Theta
+Sqrt(<r>^<2>+Theta^<2>)->Z
+Goto B
+Lbl A
+If ((C-A)*(E-A)+(D-A)*(F-B))=0
+Then Goto C
+IfEnd
+If ((C-A)*(C-E)+(D-B)*(D-F))=0
+Then Goto D
+IfEnd
+If ((E-A)*(C-E)+(F-B)*(D-F)=0
+Then Goto E
+IfEnd
+Lbl C
+C+0.5*(E-C)->T
+D+0.5*(F-D)->S
+Sqrt((T-A)^<2>+(S-B)^<2>)->Z
+Goto B
+Lbl D
+A+0.5*(E-A)->T
+B+0.5*(F-B)->S
+Sqrt((T-A)^<2>+(S-B)^<2>)->Z
+Goto B
+Lbl E
+(Sqrt((C-A)^<2>+(D-B)^<2>))frac2->Z
+A+0.5*(C-A)->T
+B+0.5*(D-B)->S
+Goto B
+Lbl B
+"Mittelpunkt"
+"Mx= ":TDisps"My= ":SDisps"Radius"
+"<r>= ":ZDispsNorm 
+A->K
+B->L
+T->A
+S->B
+ClrText
+"In der Grafik ueber- pruefen, ob Ergebnis korrekt ist."DispsClrGraph
+ViewWindow A-3Z,A+3Z,1,B-1.5Z,B+1.5Z,1
+Circle A,B,Z
+Red PlotOn A,B
+Red PlotOn K,L
+Red PlotOn C,D
+Red PlotOn E,F
+Red Text (25)*3,(65)*3,"M"
+Plot A,B
+Plot K,L
+Line
+Plot K,L
+Plot C,D
+Green Line
+Plot E,F
+Green Line
+Plot K,L
+Green LineDispsClrText
+Fix 2
+Locate 1,2,"Allgemeine"
+Locate 1,3,"Kreisgleichung"
+Locate 1,4,"(x-Mx)^<2>+(y-My)^<2>=<r>^<2>"
+Locate 1,6,"(x-     )^<2>+(y-     )^<2>"
+Locate 2,7,"=     ^<2>"
+Locate 4,6,T
+Locate 15,6,S
+Locate 3,7,ZDisps73->Z
+Return
+Lbl 2
+Norm 
+ClrText
+"Tangentialebene in"
+"einem Beruehrungs-"
+"punkt B"
+" "
+"Kugel"
+"Mx"?->A
+"My"?->B
+"Mz"?->C
+"<r>"?->D
+" "
+"Punkt B"
+"Bx"?->E
+"By"?->F
+"Bz"?->G
+E-A->P
+F-B->Q
+G-C->R
+D^<2>-(((-)A)P+((-)B)Q+((-)C)R)->S
+"Tangentialebene"
+"Nx":PDisps"Ny":QDisps"Nz":RDisps"D":SDispsReturn
+Lbl 3
+ClrText
+"Winkel zwischen"
+"1 Vektoren"
+"2 Geraden"
+"3 Gerade-Ebene"
+"4 Ebenen"
+Do
+Getkey-><r>
+LpWhile <r><>72 And <r><>62 And <r><>52 And <r><>73 And <r><>47
+<r>=72=>Goto J
+<r>=62=>Goto K
+<r>=52=>Goto L
+<r>=73=>Goto M
+<r>=47=>Return
+Lbl J
+"Vektoren"
+Goto N
+Lbl K
+"Richtungsvektoren"
+Goto N
+Lbl L
+"Richt.(-)Norm(alenv."
+Goto N
+Lbl M
+"Norm(alenvektoren"
+Goto N
+Lbl N
+"Erster Vektor"
+"A="?->G
+"B="?->H
+"C="?->I
+ClrText
+"Zweiter Vektor"
+"A="?->J
+"B="?->K
+"C="?->L
+((G*J+H*K+I*L)/(Sqrt(G^<2>+H^<2>+I^<2>)*Sqrt(J^<2>+K^<2>+L^<2>)))->M
+ClrText
+<r>=72=>Goto O
+<r>=62=>Goto P
+<r>=73=>Goto P
+<r>=52=>Goto R
+Lbl P
+cos^-1 (Abs M)->R
+Goto Q
+Lbl R
+sin^-1 (Abs M)->R
+Goto Q
+Lbl O
+cos^-1 M->R
+Goto Q
+Lbl Q
+"Winkel (in Grad)="
+RDispsReturn
+Lbl 5
+ClrText
+Locate 1,1,"~~~~ EINGABE VON: ~~~"
+Locate 1,3,"1 Parametergl."
+Locate 1,4,"2 Koordinatengl."
+Locate 1,5,"3 Norm(alenform"
+Locate 1,6,"4 3 Punkte"
+Do
+Getkey->Theta
+LpWhile Theta<>72 And Theta<>62 And Theta<>52 And Theta<>73 And Theta<>74 And Theta<>47
+Theta=72=>Goto S
+Theta=62=>Goto T
+Theta=52=>Goto U
+Theta=73=>Goto W
+Theta=47=>Return
+Lbl W
+ClrText
+"Punkt 1"
+"x1"?->A
+"y1"?->B
+"z1"?->C
+"Punkt 2"
+"x2"?->M
+M-A->M
+"y2"?->N
+N-B->N
+"z2"?->O
+O-C->O
+"Punkt 3"
+"x3"?->P
+P-A->P
+"y3"?->Q
+Q-B->Q
+"z3"?->R
+R-C->R
+Goto V
+Lbl U
+ClrText
+" -> ->  ->"
+"(x-p)*n=0"
+"Punkt"
+"X"?->A
+"Y"?->B
+"Z"?->C
+"Norm(alenv."
+"X"?->D
+"Y"?->E
+"Z"?->F
+Goto X
+Lbl S
+ClrText
+"Stuetzv."
+"X"?->A
+"Y"?->B
+"Z"?->C
+"Richtungsv. 1"
+"X"?->M
+"Y"?->N
+"Z"?->O
+"Richtungsv. 2"
+"X"?->P
+"Y"?->Q
+"Z"?->R
+Goto V
+Lbl Y
+M->D
+N->E
+O->F
+A*D+B*E+C*F->G
+Goto Z
+Lbl T
+ClrText
+"Ax+By+Cy=D"
+"A"?->D
+"B"?->E
+"C"?->F
+"D"?->G
+(G-D-2E)/F->C
+1->A
+2->B
+Lbl X
+A*D+B*E+C*F->G
+(G-D-E)/F->J
+1-A->M
+1-B->N
+J-C->O
+(G-2*D-F)/E->K
+2-A->P
+K-B->Q
+1-C->R
+Goto Z
+Lbl V
+N*R-O*Q->D
+P*O-M*R->E
+M*Q-N*P->F
+A*D+B*E+C*F->G
+Goto Z
+Lbl r
+Lbl Z
+ClrText
+Locate 1,1,"Parameter"
+Locate 1,3,"X=(   )+R(   )+S(   )"
+Locate 3,2,"(   )  (   )  (   )"
+Locate 3,4,"(   )  (   )  (   )"
+Fix 1
+Locate 4,2,A
+Locate 4,3,B
+Locate 4,4,C
+Locate 11,2,M
+Locate 11,3,N
+Locate 11,4,O
+Locate 18,2,P
+Locate 18,3,Q
+Locate 18,4,R
+Norm 
+Locate 1,5,"Koordinatengl."
+Locate 1,6,"   x+    y+   z="
+Locate 1,6,D
+Locate 7,6,E
+Locate 13,6,F
+Locate 18,6,G
+0-><r>
+While <r>=0
+Getkey-><r>
+WhileEnd
+ClrText
+Locate 1,1,"Norm(alenform"
+Locate 1,4,"n=[x-(   )] * (   )"
+Locate 3,3,"[  (   )]   (   )"
+Locate 3,5,"[  (   )]   (   )"
+Locate 7,3,A
+Locate 7,4,B
+Locate 7,5,C
+Locate 16,3,D
+Locate 16,4,E
+Locate 16,5,F
+0-><r>
+While <r>=0
+Getkey-><r>
+WhileEnd
+Return
+Lbl 6
+ClrText
+"Welches Problem liegt vor?"
+"1 ges.: Mittelpunkt"
+"2 ges.: P2"
+"3 ges.: P1"
+Do
+Getkey->C
+LpWhile C<>72 And C<>62 And C<>52 And C<>47
+If C=72
+Then "Formel:"
+"xM=(x1+x2)/2"DispsClrText
+"Gib P1 und P2 ein":"P1="
+"x1="?->A:"y1="?->B:"z1="?->D:"x2="?->E:"y2="?->F:"z2="?->G:0.5*(A+E)->U
+0.5*(B+F)->V
+0.5*(D+G)->W
+"Mittelpunkt:"
+"xM="
+UDisps"yM="
+VDisps"zM="
+WDispsIfEnd
+If C=62
+Then "Formel:"
+"x2=2xM-x1"DispsClrText
+"Gib P1 und M ein":"P1="
+"x1="?->A:"y1="?->B:"z1="?->D:"M="
+"xM="?->H:"yM="?->I:"zM="?->J:2H-A->U
+2I-B->V
+2J-D->W
+"P2="
+"x2="
+UDisps"y2="
+VDisps"z2="
+WDispsIfEnd
+If C=52
+Then "Formel:"
+"x1=2xM-x2"DispsClrText
+"Gib P2 und M ein":"P2:"
+"x2="?->E:"y2="?->F:"z2="?->G:"M:"
+"xM="?->H:"yM="?->I:"zM="?->J:2H-E->U
+2I-F->V
+2J-G->W
+"P1:"
+"x1="
+UDisps"y1="
+VDisps"z1="
+WDispsIfEnd
+If C=47
+Then Return
+Lbl 7
+ClrText
+"Waehle ausChar!"
+"1 Spieglung an Ebene"
+"2 Spieglung an Gerade"
+Do
+Getkey-><r>
+LpWhile <r><>72 And <r><>62 And <r><>47
+If <r>=47
+Then 0->Z
+Return
+IfEnd
+If <r>=62
+Then ClrText
+"Gib Punkt und Gerade ein"
+"Punkt"
+?->A:?->B:?->C
+"Gerade:"
+"Stuetzvektor:"
+?->D:?->E:?->F
+"Richtungsvektor:"
+?->G:?->H:?->I
+(IC-FI+BH-EH+AG-DG)/(G^<2>+H^<2>+I^<2>)->K
+"Fusspunkt auf Gerade:"
+D+K*GDispsE+K*HDispsF+K*IDisps"Spiegelpunkt:"
+"x="
+A+2*(D+KG-A)Disps"y="
+B+2*(E+KH-B)Disps"z="
+C+2*(F+KI-C)DispsReturn
+IfEnd
+If <r>=72
+Then ClrText
+"Gib Punkt und Ebene ein"
+"Punkt:"
+?->A:?->B:?->C
+"Ebene Ax+By+Cz=D:"
+?->D:?->E:?->F:?->G
+(G-DA-EB-FC)/(D^<2>+E^<2>+F^<2>)->K
+"Fusspunkt:"
+A+KDDispsB+KEDispsC+KFDisps"Spiegelpunkt von P anEbene"
+"x="
+A+2*KDDisps"y="
+B+2*KEDisps"z="
+C+2*KFDispsReturn
+IfEnd

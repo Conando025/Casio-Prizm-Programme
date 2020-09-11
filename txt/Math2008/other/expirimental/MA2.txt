@@ -1,0 +1,140 @@
+'ProgramMode:RUN
+0->A~Y
+ClrText
+<r>=62=>Goto 2
+<r>=52=>Goto 3
+0.05->G
+Locate 1,2,"Eingabe im GRAPHMenu:"
+Locate 1,3,"Y1=f(x)"
+Locate 1,4,"Y2=f'(x)"
+Locate 1,5,"Y3=f''(x)"
+Locate 1,6,"Y4=f'''(x)"
+Locate 1,7,"Y5=F(x)"DispsClrText
+Locate 6,1,"Check von:"
+Locate 2,3,"1  f'(x)"
+Locate 2,4,"2  f'(x) und f''(x)"
+Locate 2,5,"3  f'(x) bis f'''(x)"
+Locate 2,6,"4  F(x)"
+Locate 2,7,"5  Alle"
+Do
+Getkey->Theta
+LpWhile Theta<>72 And Theta<>62 And Theta<>52 And Theta<>73 And Theta<>63 And Theta<>47
+Theta=47=>Return
+ClrText
+" "
+" "
+" "
+" "
+Locate 1,1,"Intervall eingeben,in"
+Locate 1,2,"dem Fkt.ohne Vorzeich"
+Locate 1,3,"enwechsel+stetig ist"
+Locate 8,4,"a<=x<=b"
+"a="?->A
+"b="?->B
+ClrText
+"Besitzt die Fkt."
+"einen Parameter t?"
+" "
+"1. ja"
+"2. nein"
+Do
+Getkey->U
+LpWhile U<>72 And U<>62
+If U=72
+Then ClrText
+"Bitte einen Wert ein-"
+"geben, den der Para-"
+"meter t annehmen kann"
+"t="?->U
+IfEnd
+ClrText
+" "
+Locate 1,1,"Ergebnisse:"
+Theta=73=>Goto A
+A->X
+GraphY1->C
+B->X
+GraphY1->D
+Integral(GraphY2,A,B)->E
+D-C-E->F
+Locate 1,3,"f'(x)        =falsch"
+Abs F<=G=>Locate 15,3,"richtig"
+Theta=72=>Goto B
+A->X
+GraphY2->C
+B->X
+GraphY2->D
+Integral(GraphY3,A,B)->E
+D-C-E->F
+Locate 1,4,"f''(x)       =falsch"
+Abs F<=G=>Locate 15,4,"richtig"
+Theta=62=>Goto B
+A->X
+GraphY3->C
+B->X
+GraphY3->D
+Integral(GraphY4,A,B)->E
+D-C-E->F
+Locate 1,5,"f'''(x)      =falsch"
+Abs F<=G=>Locate 15,5,"richtig"
+Theta=52=>Goto B
+Lbl A
+A->X
+GraphY5->C
+B->X
+GraphY5->D
+Integral(GraphY1,A,B)->E
+D-C-E->F
+Locate 1,7,"F(x) - f(x)  =falsch"
+Abs F<=G=>Locate 15,7,"richtig"
+Lbl B
+Locate 1,2," "DispsReturn
+Lbl 2
+"Tangente und _Norm _ale an Y1 an der Stelle x"
+"x="?->X
+GraphY1-X*d/dx(GraphY1,X)->A
+GraphY1+Xfracd/dx(GraphY1,X)->B
+ClrText
+"Tangente y=mx+n an Y1im Punkt (x,y):"
+"Px="
+"Py="
+"m="
+"n="
+Locate 4,3,X
+Locate 4,4,GraphY1
+Locate 3,5,d/dx(GraphY1,X)
+Locate 3,6,ADispsClrText
+"Normale y=mx+n:"
+"m="
+"n="
+Locate 3,2,(-)1fracd/dx(GraphY1,X)
+Locate 3,3,BDispsReturn
+Lbl 3
+"Symmetrie von Y1"
+"Intervall eingeben,in"
+"dem Fkt. stetig ist"
+"       a_<=_x_<=_b"
+"a="?->A
+"b="?->B
+A->X
+GraphY1->B
+(-)X->X
+GraphY1->C
+B->X
+GraphY1->D
+(-)X->X
+GraphY1->E
+ClrText
+" "
+Locate 1,1,"Symmetrie von Y1"
+If B=C And D=E
+Then Locate 5,4,"f(x)=f((-)x) =>"
+Locate 1,5,"Axialsym. zur y-Achse"
+Else If (-)B=C And (-)D=E
+Then Locate 5,4,"femto((-)x)=(-)femto(x) =>"
+Locate 1,5,"Punktsym.zum Ursprung"
+Else Locate 1,4,"Keine Symmetrie an"
+Locate 1,5,"y-Achse bzw. Ursprung"
+IfEnd
+IfEnd
+Locate 1,2," "Disps

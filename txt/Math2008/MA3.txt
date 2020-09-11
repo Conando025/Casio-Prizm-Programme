@@ -199,12 +199,12 @@ IfEnd
 Abs (IH-LH+JG-MG+KF-NF)->O
 H^<2>+G^<2>+F^<2>->P
 "d="
-Locate 3,2,O
+Locate 3,3,O
 "  /_Sqrt_"
-Locate 5,3,P
+Locate 5,4,P
 " "
 " ="
-Locate 3,5,O/SqrtPDispsIfEnd
+Locate 3,6,O/SqrtPDispsIfEnd
 Else "Schnittgerade:"
 GB-FC->I
 FD-BH->J
@@ -251,12 +251,7 @@ cos^-1 Abs ((HD+GC+FB)fracSqrt((H^<2>+G^<2>+F^<2>)(D^<2>+C^<2>+B^<2>)))->W
 sin (pifrac2)=1=>180W/pi->W
 (Int (100W))/100->W
 Locate 9,7,W
-Locate 14,7,"_deg_"
-
-
-
-
-DispsIfEnd
+Locate 14,7,"_deg_"DispsIfEnd
 IfEnd
 If Theta=73
 Then "Punkt - Gerade"

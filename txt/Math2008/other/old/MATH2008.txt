@@ -1,0 +1,100 @@
+'ProgramMode:RUN
+'Ver. 1.1 frauhottelmann
+0->Z
+Lbl A
+0->A~Y
+0-><r>
+0->Theta
+ClrText
+If Z=0
+Then Locate 3,2,"F1  Allgemeines"
+Locate 3,3,"F2  Analysis"
+Locate 3,4,"F3  Algebra 1"
+Locate 3,5,"F4  Algebra 2"
+Locate 3,6,"F5  Stochastik"
+Locate 3,7,"Bugfix by Frank"
+Do
+Getkey->Z
+LpWhile Z<>47 And Z<>79 And Z<>69 And Z<>59 And Z<>49 And Z<>39
+ClrText
+Z=47=>Stop
+IfEnd
+If Z=79
+Then ClrGraph
+Locate 1,3,"1  _Log_arithmus"
+Locate 1,4,"2  Polynomdivision"
+Locate 1,5,"3  Dreiecksberechnungen"
+Locate 1,6,"4  Gaussverfahren"
+Do
+Getkey-><r>
+LpWhile <r><>47 And <r><>52 And <r><>73 And <r><>72 And <r><>62
+If <r>=52
+Then Prog "MA6"
+IfEnd
+If <r>=47
+Then 0->Z
+Else Prog "MA1"
+IfEnd
+IfEnd
+If Z=69
+Then Locate 1,3,"1 Ableitungen pruefen"
+Locate 1,4,"2 Tang. + _Norm(_. an Y1"
+Locate 1,5,"3 Symmetrie von Y1"
+Do
+Getkey-><r>
+LpWhile <r><>72 And <r><>62 And <r><>52 And <r><>47
+If <r>=47
+Then 0->Z
+Else Prog "MA2"
+IfEnd
+IfEnd
+If Z=59
+Then Locate 1,1,"1 Lagebeziehungen"
+Locate 1,2,"2 Abstaende"
+Locate 1,3,"3 Ebenengl.-umf_or_mung"
+Locate 1,4,"4 Skalarprodukt"
+Locate 1,5,"5 Spurpunkte"
+Locate 1,6,"6 Teil_(-)_//Mittelpunkt"
+Locate 1,7,"7 Dreiecke"
+Do
+
+
+Getkey-><r>
+LpWhile <r><>72 And <r><>62 And <r><>52 And <r><>73 And <r><>63 And <r><>53 And <r><>74 And <r><>47
+If <r>=47
+Then 0->Z
+Else Prog "MA3"
+IfEnd
+IfEnd
+If Z=49
+Then Locate 1,1,"1  3P_->_Kreis"
+Locate 1,2,"2  Tangentialebene"
+Locate 1,3,"3  Winkel"
+Locate 1,4,"4  Kreuzprodukt"
+Locate 1,5,"5  Umw_and_lung"
+Locate 1,6,"6  Mittelpunkt"
+Locate 1,7,"7  Punktspieglung"
+Do
+Getkey-><r>
+LpWhile <r><>72 And <r><>62 And <r><>52 And <r><>73 And <r><>63 And <r><>53 And <r><>74 And <r><>47
+If <r>=47
+Then 0->Z
+Else Prog "MA5"
+IfEnd
+IfEnd
+If Z=39
+Then Locate 1,2,"1 _&B_ominalverteilung"
+Locate 1,3,"2 Wahrscheinlichkeits"
+Locate 1,4,"  Verteilung"
+Locate 1,5,"3 Hypergeom.-Verteil."
+Locate 1,6,"4 _Norm(_al.-Verteilung"
+Locate 1,7,"5 Bernullikette"
+Do
+Getkey-><r>
+LpWhile <r><>72 And <r><>62 And <r><>47 And <r><>52 And <r><>73 And <r><>63
+If <r>=47
+Then 0->Z
+Else Prog "MA4"
+IfEnd
+IfEnd
+Goto A

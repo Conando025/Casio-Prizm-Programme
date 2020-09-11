@@ -12,7 +12,7 @@ Locate 3,3,"F2  Analysis"
 Locate 3,4,"F3  Algebra 1"
 Locate 3,5,"F4  Algebra 2"
 Locate 3,6,"F5  Stochastik"
-Locate 3,7,"Bugfix by Frank"
+Locate 3,7,"Bugfix by Marvin"
 Do
 Getkey->Z
 LpWhile Z<>47 And Z<>79 And Z<>69 And Z<>59 And Z<>49 And Z<>39

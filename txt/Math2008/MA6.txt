@@ -9,7 +9,7 @@ X=2=>Goto 9
 ViewWindow 1,127,0,1,63,0
 "Dreiecksberechnung"
 "=================="
-"A="?->A
+"A="?->A4
 "B="?->B
 "C="?->C
 "Alpha="?->D

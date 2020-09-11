@@ -1,0 +1,285 @@
+'ProgramMode:RUN
+0->A~Y
+ClrText
+<r>=62=>Goto 2
+<r>=52=>Goto 3
+<r>=73=>Goto 4
+<r>=63=>Goto 5
+0->V
+Locate 1,1,"p=Wahrscheinlichkeit"
+Locate 1,2,"n=Anzahl   k=Treffer"
+Locate 1,4,"1. _ProbP(_x=k)"
+Locate 1,5,"2. _ProbP(_x_<=_k)"
+Locate 1,6,"3. _ProbP(_k_<=_x_<=_n)"
+Locate 1,7,"4. _ProbP(_k1_<=_x_<=_k2)"
+Do
+Getkey->Theta
+LpWhile Theta<>72 And Theta<>62 And Theta<>52 And Theta<>73 And Theta<>47
+Theta=47=>Return
+ClrText
+"n="?->N
+"p="?->P
+If Theta=72
+Then "k="?->T
+T->U
+IfEnd
+If Theta=62
+Then "k="?->U
+0->T
+IfEnd
+If Theta=73
+Then "k1="?->T
+"k2="?->U
+IfEnd
+If Theta=52
+Then "k="?->T
+N->U
+IfEnd
+ClrText
+T->B
+N*P->G
+N*P*(1-P)->H
+N>100=>Goto B
+G<9=>Goto D
+Locate 1,2,"1. nach Bernoulli"
+Locate 1,4,"2. nach Gauss"
+Do
+Getkey->A
+LpWhile A<>72 And A<>62
+A=62=>Goto B
+Lbl D
+ClrText
+Locate 5,1,"nach Bernoulli"
+Lbl A
+NnCrT*P^T*(1-P)^(N-T)->A
+A+V->V
+T+1->T
+T<=U=>Goto A
+V->E
+" "
+" "
+" "
+" "
+Locate 1,1,"_ProbP(_x=k)"
+Locate 2,2,"=n_nCr_k*p^k*(1-p)^(n-k)"
+Locate 2,3,"="
+Locate 3,3,V
+B->T
+Goto C
+Lbl B
+ClrText
+Locate 6,1,"nach Gauss"
+G->A
+H->B
+0->K
+Locate 1,2,"E(x)=n*p="
+Locate 1,3,"V(x)=n*p*(1-p)="
+Locate 10,2,G
+Locate 16,3,H
+(T-0.5-A)/SqrtB->C
+(Abs (Frac (C*100)))>=0.5=>1->K
+K=1 And C>0=>C+0.01->C
+K=1 And C<0=>C-0.01->C
+(Int (C*100))/100->C
+Locate 1,4,"Z1=(k -0.5-E(x))/_Sqrt_V(x)"
+Locate 3,5,"="
+Locate 4,5,C
+0->K
+(U+0.5-A)/SqrtB->D
+(Abs (Frac (D*100)))>=0.5=>1->K
+K=1 And D>0=>D+0.01->D
+K=1 And D<0=>D-0.01->D
+(Int (D*100))/100->D
+Locate 1,6,"Z2=(k +0.5-E(x))/_Sqrt_V(x)"
+If Theta=52
+Then Locate 6,4,"1"
+Locate 6,6,"2"
+IfEnd
+Theta=62=>Locate 5,4,"0 "
+Locate 3,7,"="
+Locate 4,7,DDispsClrText
+" "
+" "
+" "
+" "
+Locate 1,1,"_Integral(_1/_Sqrt_(2_pi_)*_e^_(_(-)_1_frac_2*x_^<2>_),"
+Locate 1,2,"Z1,Z2="
+C<(-)6=>(-)6->C
+C>6=>6->C
+D<(-)6=>(-)6->D
+D>6=>6->D
+Integral(1/Sqrt(2pi)*e^((-)1frac2*X^<2>),C,D->E
+Abs E->E
+E->V
+Locate 7,2,V
+Lbl C
+Frac (E*10000)>=0.5=>E+0.0001->E
+(Int (E*10000))/10000->E
+If Theta=72
+Then Locate 1,4,"_ProbP(_x=    )="
+Locate 5,4,T
+Fix 4
+Locate 11,4,E
+Norm 
+IfEnd
+If Theta=62
+Then Locate 1,4,"_ProbP(_x_<=_    )="
+Locate 5,4,U
+Fix 4
+Locate 11,4,E
+Norm 
+IfEnd
+If Theta=52 Or Theta=73
+Then Locate 1,4,"_ProbP(_    _<=_x_<=_    )="
+Locate 3,4,T
+Locate 10,4,U
+Locate 16,4,E
+IfEnd
+Locate 1,6,"E(x)=_micro_="
+Locate 1,7,"_Sqrt_V(x)=_Sqrt_"
+Locate 8,6,G
+Locate 8,7,HDispsReturn
+Lbl 2
+"Wahrscheinlichkeits- Verteilung der"
+"Zufallsgroesse x:"
+" "
+"Wieviele versch. xi"?->N
+Seq(0,X,1,N,1)->List 1
+List 1->List 2
+For 1->A To N
+ClrText
+"  .:"
+" "
+Locate 1,1,A
+"xi="?->List 1[A]
+"_ProbP(_x=xi)="?->List 2[A]
+Next
+Sigma(List 1[X]*List 2[X],X,1,N)->E
+Sigma((List 1[X]-E)^<2>*List 2[X],X,1,N)->F
+SqrtF->G
+ClrText
+"Erwartungswert:"
+"E(x)=_micro_="
+Locate 8,2,E
+"Varianz:"
+"V(x)="
+Locate 6,4,F
+"St_and_ardabweichung:"
+"_Sqrt_V(x)="
+Locate 7,6,GDispsLbl 3
+Do
+ClrText
+ClrGraph
+"Ges-anzahl Kuge_ln _"?->N
+"'gute' Kuge_ln _"?->G
+"Anz.gezogene KugeLn"?->K
+"davon 'gute' KugeLn"
+"mindestens"?->A
+"hoechstens"?->B
+0->S
+ClrText
+For A->I To B
+S+(GnCrI)*(N-G)nCr(K-I)/(NnCrK)->S
+Next
+"      _ProbP(_X)=":S
+Stop
+Goto 0
+Lbl 4
+ClrText
+"_Norm(_alverteilung mit E(X)=_micro_="?->M
+"_Sqrt_V(X)=S="?->S
+"_ProbP(__Regression_a__<=_X_<=__Regression_b_)"
+"_Regression_a_="?->A
+"_Regression_b_="?->B
+ProbP((B-M)/S)-ProbP((A-M)/S)DispsStop
+Lbl 5
+ViewWindow 1,127,0,1,63,0
+Text (8)*3,(15)*3,"Bernoulliversuchskette"
+F-Line 10,50,110,50
+Text (20)*3,(40)*3,"Einzelerfolge"
+Text (29)*3,(40)*3,"Erfolgssequenz"
+Text (38)*3,(40)*3,"Stufen bestimmen"
+20->D
+Do
+Text (D)*3,(34)*3,">"
+PlotOn 1,1
+Do:Getkey->A:LpWhile A<>31 And A<>37 And A<>28
+Text (D)*3,(34)*3," "
+A=37=>D+9->D
+A=28=>D-9->D
+D=47=>20->D
+D=11=>38->D
+LpWhile A<>31
+D=20=>Goto 7
+D=29=>Goto 8
+D=38=>Goto 9
+Lbl 7
+0->K
+ClrText
+"Stufen "?->N
+"Erfolgsw."?->P
+P>=1=>P/100->P
+Int (N/8.05)+1->M
+For 1->I To M
+K<0=>0->K
+Cls
+Text (1)*3,(2)*3,"Erfolge"
+Text (1)*3,(35)*3,"Wahrscheinlichkeiten"
+Horizontal 57
+Vertical 31
+If N<200 And M>1
+Then For 1->J To M+1
+PxlOn 59-2J,125
+Next
+PxlOn 56-2M+2I,125
+F-Line 124,7,124,7+2M
+F-Line 126,7,126,7+2M
+IfEnd
+3->T
+Do
+T+6->T
+T>60=>8I+1->K
+(NnCrK)*(P^K)*((1-P)^(N-K))->S
+Text (T)*3,(6)*3,K
+Text (T)*3,(35)*3,S
+PlotOn 1,1
+K+1->K
+LpWhile K<=(8I) And K<=N
+Do:Getkey->A:LpWhile A<>28 And A<>37 And A<>31
+If A=28:Then 8I-16->K:I=1=>I-1->I:I>1=>I-2->I:IfEnd
+A=31=>M->I:Next
+If A=37 Or A=31:Then ClrText:Stop:IfEnd
+Lbl 8
+ClrText
+"Stufen "?->N
+"Erfolgsw."?->P
+"Anfang "?->K
+"Ende "?->L
+P>=1=>P/100->P
+K->Q
+0->S
+Do
+(NnCrK)*(P^K)*((1-P)^(N-K))+S->S
+K+1->K
+LpWhile K<=L
+ClrText
+"Wahrscheinlichkeit"
+"fuer"
+Locate 6,2,Q
+Locate 8,2,"bis"
+Locate 12,2,L
+Locate 14,2,"Erfolge:"
+Locate 1,4,S
+Stop
+Lbl 9
+ClrText
+"p "?->P
+"p(_Exp_) "?->B
+P>=1=>P/100->P
+B>=1=>B/100->B
+log (1-B)/log (1-P)->S
+ClrText
+"Es waeren"
+Locate 11,1,S
+"Stufen notwendig"
+Stop

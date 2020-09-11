@@ -37,10 +37,7 @@ Locate 1,5,"a="
 Locate 1,6,"b="
 Locate 3,4,A
 Locate 3,5,B
-Locate 3,6,C
-
-
-DispsReturn
+Locate 3,6,CDispsReturn
 Lbl 2
 "hoechst. _Exp(ae^bx)_onent im Zaehler"?->A
 Int (A+1)->A
@@ -109,7 +106,8 @@ Dim Mat A->List 1
 List 1[1]->R
 For 1->I To R-1
 For I+1->J To R
-If Mat A[J,I]<>0
+If Mat A[J,I]
+<>0
 Then *Row Mat A[I,I],A,J
 (-)Mat A[J,I]fracMat A[I,I]->M
 *Row+ M,A,I,J
