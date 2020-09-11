@@ -1,0 +1,7 @@
+'ProgramMode:RUN
+'Copyright by Conando'
+"Wahrschlichkeit"?->W
+"Ziehungen"?->N
+"Richtige"?->K
+ClrText
+NnCrK*W^K*(1-W)^(N-K)->L

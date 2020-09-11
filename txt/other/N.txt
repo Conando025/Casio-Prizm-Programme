@@ -1,0 +1,15 @@
+'ProgramMode:RUN
+"Source"?->F
+"Target"?->C
+"Number"?->Str 13
+0->S
+For 1->N To StrLen(Str 13)
+(StrSrc("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",StrMid(Str 13,N,1))-1)*F^(StrLen(Str 13)-N)+S->S
+Next
+""->Str 13
+For (Int logab(C,S))->N To 0 Step (-)1
+Str 13+StrMid("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",(S Int/ C^N)+1,1)->Str 13
+MOD(S,C^N)->S
+Next
+ClrText
+Locate 1,1,Str 13

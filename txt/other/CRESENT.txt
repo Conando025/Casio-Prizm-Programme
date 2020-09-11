@@ -1,0 +1,21 @@
+'ProgramMode:RUN
+"s"?->S
+Sfrac2->S
+"hs"?->H
+"b"?->B
+ClrText
+tan^-1 (HfracS)->A
+((Sqrt(S^<2>+H^<2>))/2)/sin A-H->D
+"d1 ="
+Locate 6,1,D
+Sqrt(D^<2>+S^<2>)->R
+"r1 ="
+Locate 6,2,R
+H+B->H
+tan^-1 (HfracS)->A
+((Sqrt(S^<2>+H^<2>))/2)/sin A-H->D
+"d2 ="
+Locate 6,3,D
+Sqrt(D^<2>+S^<2>)->R
+"r2 ="
+Locate 6,4,R
