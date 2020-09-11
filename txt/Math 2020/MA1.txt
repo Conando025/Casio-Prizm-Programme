@@ -1,0 +1,127 @@
+'ProgramMode:RUN
+0->A~Y
+ClrText
+<r>=62=>Goto 2
+<r>=73=>Goto 3
+pifrac69->X
+" "
+" "
+" "
+" "
+Locate 6,1,"Logarithmus"
+Locate 8,3,"log a=b"
+Locate 11,4,"<r>"
+Locate 5,2,"gesucht = X"
+"<r>="?->A
+"a="?->B
+"b="?->C
+A=X=>Goto A
+B=X=>Goto B
+C=X=>Goto C
+Lbl A
+CXrtB->A
+Goto D
+Lbl B
+A^C->B
+Goto D
+Lbl C
+(log B)frac(log A)->C
+Lbl D
+ClrText
+" "
+" "
+Locate 8,1,"_log _A=B"
+Locate 11,2,"<r>"
+Locate 1,4,"<r>="
+Locate 1,5,"a="
+Locate 1,6,"b="
+Locate 3,4,A
+Locate 3,5,B
+Locate 3,6,C
+
+
+DispsReturn
+Lbl 2
+"hoechst. Exponent    (ae^bx) im Zaehler"?->A
+Int (A+1)->A
+Seq(0,B,1,A,1)->List 1
+List->Mat(List 1)->Mat A
+For 1->C To A
+ClrText
+"ax^"
+Locate 4,1,A-C
+"a="?->Mat A[C,1]
+Next
+ClrText
+"hoechst. Exponent    (ae^bx) im Nenner"
+?->A
+Int (A+1)->A
+Seq(0,B,1,A,1)->List 1
+List->Mat(List 1)->Mat B
+For 1->C To A
+ClrText
+"ax^"
+Locate 4,1,A-C
+"a="?->Mat B[C,1]
+Next
+ClrText
+Dim Mat A->List 1
+List 1[1]->S
+Dim Mat B->List 1
+List 1[1]->T
+Seq(0,B,1,S-T+1,1)->List 1
+List->Mat(List 1)->Mat D
+Mat A->Mat C
+For 1->I To S-T+1
+Mat C[I,1]fracMat B[1,1]->B
+B->Mat D[I,1]
+For I->J To (I+T-1)
+Mat C[J,1]-BMat B[J-I+1,1]->Mat C[J,1]
+Next
+Next
+"Ergebnis:"DispsDim Mat D->List 1
+List 1[1]->A
+Dim Mat C->List 1
+List 1[1]->B
+For 1->C To A
+If Mat D[C,1]<>0
+Then ClrText
+"ax^"
+Locate 4,1,A-C
+"a="
+Mat D[C,1]DispsIfEnd
+Next
+ClrText
+"Rest:"Disps1->F
+For 1->C To B
+If Mat C[C,1]<>0
+Then 0->F
+ClrText
+"ax^"
+Locate 4,1,B-C
+"a="
+Mat C[C,1]DispsIfEnd
+Next
+If F=1
+Then "Kein Rest"DispsIfEnd
+Lbl 3:ClrText
+Dim Mat A->List 1
+List 1[1]->R
+For 1->I To R-1
+For I+1->J To R
+If Mat A[J,I]<>0
+Then *Row Mat A[I,I],A,J
+(-)Mat A[J,I]fracMat A[I,I]->M
+*Row+ M,A,I,J
+IfEnd
+Next
+Mat ADispsNext
+For 1->I To R
+*Row 1fracMat A[I,I],A,I:0->Mat A[I,I]
+Next
+Mat->List(A,R+1->List 1
+For R->I To 2 Step (-)1
+Mat->List(A,I->List 2
+List 1-List 1[I]*List 2->List 1
+Next
+List 1DispsReturn
